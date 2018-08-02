@@ -159,9 +159,12 @@ function tbSetupFile()
         var newLayerSet  = product.layerSets.add();
         newLayerSet.name = doc.channels[i].name;
         newLayerMask( newLayerSet, doc.channels[i], false );
-      break; //
+      break;
     }
   }
+  
+  // select isolations group
+  doc.activeLayer = isolations;
 }
 
 // duplicate document and merge layers
