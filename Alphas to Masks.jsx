@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////
-// `TB Setup.jsx`
+// `Alphas to Masks.jsx`
 //
 // Photoshop File Setup
 //
-// Sets up working file, including copying alpha channels to masks on groups.
+// Copies alpha channels to masks on groups
 //
 // Compatibility:
 // Photoshop 2017.1.3 RELEASE
@@ -53,7 +53,7 @@ function tbSetupFile()
   // basic declarations
   var doc                 = app.activeDocument;
   var visibleChannelCount = 0
-
+/*
   // background fill color
   fillColorHex            = "f6f6f8";
   fillColor               = new SolidColor;
@@ -67,7 +67,7 @@ function tbSetupFile()
   while ( doc.artLayers.length > 0 )
   {
     i = doc.artLayers.length - 1;
-    
+
     doc.artLayers[i].isBackgroundLayer = false;
     doc.artLayers[i].allLocked         = false;
     doc.artLayers[i].move( isolations, ElementPlacement.INSIDE );
@@ -108,7 +108,7 @@ function tbSetupFile()
   doc.selection.load( bgA, SelectionType.EXTEND, false );
 
   newLayerMask( bg, doc.selection, true );
-
+*/
   // establish visible channels (will always be RGB, but whatever)
   switch (doc.mode)
   {
@@ -140,6 +140,7 @@ function tbSetupFile()
   // loop through alphas
   for ( var i=visibleChannelCount; i < doc.channels.length; i++ )
   {
+/*
     // filter alphas by name
     switch ( doc.channels[i].name.toUpperCase() )
     {
@@ -156,17 +157,21 @@ function tbSetupFile()
 
       // all other alphas are added inside product group
       default:
-        var newLayerSet  = product.layerSets.add();
+*/
+        var newLayerSet  = doc.layerSets.add();
         newLayerSet.name = doc.channels[i].name;
         newLayerMask( newLayerSet, doc.channels[i], false );
+/*
       break;
     }
+*/
   }
-  
+/*
   // select isolations group
   doc.activeLayer = isolations;
+*/
 }
-
+/*
 // duplicate document and merge layers
 function duplicateDocument( doc, name )
 {
@@ -212,6 +217,7 @@ function newSolidFillRGB( red, green, blue )
 
   return app.activeDocument.activeLayer;
 }
+*/
 
 // creates layer mask from alpha or selection
 function newLayerMask( layer, alphaOrSelection, invert )
